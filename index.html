@@ -704,7 +704,43 @@
 			</div>
 		</div>
 	</footer>
-	
+	<script>
+		document.getElementById('contactForm').addEventListener('submit', function(e) {
+			e.preventDefault(); // Empêche le rechargement de la page
+		
+			// Récupère les données du formulaire
+			const formData = new FormData(this);
+			const url = this.action;
+		
+			// Envoie les données via AJAX
+			fetch(url, {
+				method: 'POST',
+				body: formData
+			})
+			.then(response => response.json())
+			.then(data => {
+				if (data.result === 'success') {
+					// Affiche le message de confirmation
+					document.getElementById('confirmationMessage').innerText = "Merci pour votre contact. Nous vous répondrons dès que possible.";
+					document.getElementById('confirmationMessage').style.display = 'block';
+		
+					// Réinitialise le formulaire
+					document.getElementById('contactForm').reset();
+				} else {
+					// Affiche un message d'erreur en cas d'échec
+					document.getElementById('confirmationMessage').innerText = "Une erreur s'est produite. Veuillez réessayer.";
+					document.getElementById('confirmationMessage').style.display = 'block';
+				}
+			})
+			.catch(error => {
+				console.error('Error:', error);
+				// Affiche un message d'erreur en cas d'échec
+				document.getElementById('confirmationMessage').innerText = "Une erreur s'est produite. Veuillez réessayer.";
+				document.getElementById('confirmationMessage').style.display = 'block';
+			});
+		});
+		</script>
+		
   
 
   <!-- loader -->
