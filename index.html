@@ -617,21 +617,22 @@
 				<div class="col-md-6 order-md-last d-flex">
 					<form action="https://script.google.com/macros/s/AKfycbwYeo7bHz1M8aWRMSs5mRvgTqPbvCdm4aQmUV5nxGNf2S8uqti8S_6ltjLbLHzdQ2enhQ/exec" method="post" class="bg-light p-4 p-md-5 contact-form">
 						<div class="form-group">
-							<input type="text" name="nom" class="form-control" placeholder="Votre nom">
+							<input type="text" name="nom" class="form-control" placeholder="Votre nom" required>
 						</div>
 						<div class="form-group">
-							<input type="text" name="email" class="form-control" placeholder="Votre e-mail">
+							<input type="email" name="email" class="form-control" placeholder="Votre e-mail" required>
 						</div>
 						<div class="form-group">
-							<input type="text" name="sujet" class="form-control" placeholder="Sujet">
+							<input type="text" name="sujet" class="form-control" placeholder="Sujet" required>
 						</div>
 						<div class="form-group">
-							<textarea name="message" id="" cols="30" rows="7" class="form-control" placeholder="Message"></textarea>
+							<textarea name="message" cols="30" rows="7" class="form-control" placeholder="Message" required></textarea>
 						</div>
 						<div class="form-group">
 							<input type="submit" value="Envoyer le message" class="btn btn-primary py-3 px-5">
 						</div>
 					</form>
+					<div id="confirmationMessage" style="display:none; color: green;"></div>
 				</div>
 			
 				<div class="col-md-6 d-flex">
