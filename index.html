@@ -615,7 +615,7 @@
 	
 			<div class="row no-gutters block-9">
 				<div class="col-md-6 order-md-last d-flex">
-					<form action="https://script.google.com/macros/s/AKfycbwYeo7bHz1M8aWRMSs5mRvgTqPbvCdm4aQmUV5nxGNf2S8uqti8S_6ltjLbLHzdQ2enhQ/exec" method="post" class="bg-light p-4 p-md-5 contact-form">
+					<form id="contactForm" class="bg-light p-4 p-md-5 contact-form">
 						<div class="form-group">
 							<input type="text" name="nom" class="form-control" placeholder="Votre nom" required>
 						</div>
@@ -632,13 +632,14 @@
 							<input type="submit" value="Envoyer le message" class="btn btn-primary py-3 px-5">
 						</div>
 					</form>
-					<div id="confirmationMessage" style="display:none; color: green;"></div>
+					<div id="confirmationMessage" class="alert alert-success mt-4" style="display:none;"></div>
 				</div>
 			
 				<div class="col-md-6 d-flex">
 					<div class="img" style="background-image: url(images/photo_profile.png);"></div>
 				</div>
 			</div>
+			
 			
 		</div>
 	</section>
@@ -710,7 +711,7 @@
 		
 			// Récupère les données du formulaire
 			const formData = new FormData(this);
-			const url = this.action;
+			const url = 'https://script.googleusercontent.com/macros/echo?user_content_key=6USiaXZtdbigi8uhds3wMiC--fcASiKJUm4-14KkNN1AaHVLztaGa3NjNCMyVzl-B7Vjt5v0RS1GvjHnG-5OyZu8VkmYf1T2m5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnIgBcHGZiv6VlSxtzma7uD8KtLg5-XeaeyrlDItU-Wc20PwelU4X1_2YXjlTPFAIWO6QY-eJ_yAYcI2qIHfW4hE4yopbddr2Vdz9Jw9Md8uu&lib=My4nWw0YxT8M1p7NDMQCkb6WhF8CIFOSr';
 		
 			// Envoie les données via AJAX
 			fetch(url, {
@@ -719,18 +720,12 @@
 			})
 			.then(response => response.json())
 			.then(data => {
-				if (data.result === 'success') {
-					// Affiche le message de confirmation
-					document.getElementById('confirmationMessage').innerText = "Merci pour votre contact. Nous vous répondrons dès que possible.";
-					document.getElementById('confirmationMessage').style.display = 'block';
+				// Affiche le message de confirmation
+				document.getElementById('confirmationMessage').innerText = data.result;
+				document.getElementById('confirmationMessage').style.display = 'block';
 		
-					// Réinitialise le formulaire
-					document.getElementById('contactForm').reset();
-				} else {
-					// Affiche un message d'erreur en cas d'échec
-					document.getElementById('confirmationMessage').innerText = "Une erreur s'est produite. Veuillez réessayer.";
-					document.getElementById('confirmationMessage').style.display = 'block';
-				}
+				// Réinitialise le formulaire
+				document.getElementById('contactForm').reset();
 			})
 			.catch(error => {
 				console.error('Error:', error);
